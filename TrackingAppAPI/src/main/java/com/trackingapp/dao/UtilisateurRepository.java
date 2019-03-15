@@ -9,4 +9,6 @@ import com.trackingapp.model.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
 
+	public Utilisateur findByUsername(String username);
+
 }

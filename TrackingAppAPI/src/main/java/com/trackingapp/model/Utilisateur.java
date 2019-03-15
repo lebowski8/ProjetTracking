@@ -37,6 +37,12 @@ public class Utilisateur {
 		this.password = password;
 	}
 
+	public Utilisateur() {
+		super();
+	}
+
+	
+
 	public Long getIdUtilisateur() {
 		return idUtilisateur;
 	}
