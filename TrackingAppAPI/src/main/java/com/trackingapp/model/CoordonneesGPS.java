@@ -4,8 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class CoordonneesGPS {
@@ -13,6 +18,7 @@ public class CoordonneesGPS {
 	@Id @GeneratedValue
 	private Long idCoordonneesGPS;
 	
+
 	@Column
 	private Double lng;
 	
@@ -22,6 +28,10 @@ public class CoordonneesGPS {
 	@Column
 	private Date date;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idactivity")
+    @JsonBackReference
+	private Activity activity;
 	
 	
 	
@@ -29,11 +39,12 @@ public class CoordonneesGPS {
 		super();
 	}
 
-	public CoordonneesGPS(Double lng, Double lat, Date date) {
+	public CoordonneesGPS(Double lng, Double lat, Date date, Activity activity) {
 		super();
 		this.lng = lng;
 		this.lat = lat;
 		this.date = date;
+		this.activity = activity;
 	}
 
 	public Long getIdCoordonneesGPS() {

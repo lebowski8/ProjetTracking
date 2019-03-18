@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,13 +16,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+@Entity
 public class Activity {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long idactivity;
 	private String typeSport;
-	private Long distance;
+	private double distance;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -37,14 +38,14 @@ public class Activity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUtilisateur")
 	@JsonBackReference
-	private Utilisateur utiliSateur;
+	private Utilisateur utilisateur;
 
 	public Long getId() {
-		return id;
+		return idactivity;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.idactivity = id;
 	}
 
 	public String getTypeSport() {
@@ -55,7 +56,7 @@ public class Activity {
 		this.typeSport = typeSport;
 	}
 
-	public Long getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
@@ -88,22 +89,21 @@ public class Activity {
 	}
 
 	public Utilisateur getUtiliSateur() {
-		return utiliSateur;
+		return utilisateur;
 	}
 
 	public void setUtiliSateur(Utilisateur utiliSateur) {
-		this.utiliSateur = utiliSateur;
+		this.utilisateur = utiliSateur;
 	}
 
-	public Activity(String typeSport, Long distance, @NotNull Calendar dateFin, @NotNull Calendar dateDebut,
-			Collection<CoordonneesGPS> coordonnees, Utilisateur utiliSateur) {
+	public Activity(String typeSport, double i, @NotNull Calendar dateFin, @NotNull Calendar dateDebut,
+			 Utilisateur utiliSateur) {
 		super();
 		this.typeSport = typeSport;
-		this.distance = distance;
+		this.distance = i;
 		this.dateFin = dateFin;
 		this.dateDebut = dateDebut;
-		this.coordonnees = coordonnees;
-		this.utiliSateur = utiliSateur;
+		this.utilisateur = utiliSateur;
 	}
 
 	public Activity() {
