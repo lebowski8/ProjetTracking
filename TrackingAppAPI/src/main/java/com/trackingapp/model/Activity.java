@@ -1,5 +1,6 @@
 package com.trackingapp.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -16,8 +17,14 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
-public class Activity {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+public class Activity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long idactivity;

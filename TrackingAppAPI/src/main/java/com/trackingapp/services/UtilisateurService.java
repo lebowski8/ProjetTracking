@@ -65,7 +65,6 @@ public class UtilisateurService {
 			user.setPoids(userRequest.getPoids());
 	        return utilisateurRepository.save(user);
 	    }).orElseThrow(() -> new ResourceNotFoundException("UserID " + id + " not found"));
-
     }
 	
 }

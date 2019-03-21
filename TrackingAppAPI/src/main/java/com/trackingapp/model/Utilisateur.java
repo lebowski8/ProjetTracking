@@ -1,5 +1,6 @@
 package com.trackingapp.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -13,10 +14,17 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class Utilisateur {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Utilisateur implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id @GeneratedValue
 	private Long idUtilisateur;
 	

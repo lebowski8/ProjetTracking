@@ -38,14 +38,28 @@ public class TrackingAppApiApplication implements CommandLineRunner{
 		
 		// TODO Auto-generated method stub
 		Utilisateur moi = new Utilisateur("junior","lebowski",12.5, "khyar", "minou minou");
+		Utilisateur user2 = new Utilisateur("mohamed","bahammou",12.5, "pseudo", "password");
+		Utilisateur user3 = new Utilisateur("ayoub","lebowski",12.5, "lebowski", "password");
+		Utilisateur user4 = new Utilisateur("ayoub","lebowski",12.5, "lebowski", "password");
+		
+		
 		util.save(moi);
+		util.save(user2);
+		util.save(user3);
+		util.save(user4);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");	
 		Calendar dateFin = new GregorianCalendar(2019,4,31);
 		Calendar dateDebut = new GregorianCalendar(2019,3,31);
 		
 		Activity myactivity = new Activity("foot",15, dateFin, dateDebut, moi);
+		Activity activityU2 = new Activity("foot",15, dateFin, dateDebut, user2);
+		Activity activityU3 = new Activity("foot",15, dateFin, dateDebut, user3);
+		Activity activityU4 = new Activity("foot",15, dateFin, dateDebut, user4);
 		activity.save(myactivity)	;
-		activity.toString();
+		activity.save(activityU2)	;
+		activity.save(activityU3)	;
+		activity.save(activityU4)	;
+		System.out.println("SERVER LAUNCHED...");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.trackingapp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class CoordonneesGPS {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class CoordonneesGPS implements Serializable{
 	
 	@Id @GeneratedValue
 	private Long idCoordonneesGPS;
@@ -44,6 +47,14 @@ public class CoordonneesGPS {
 		this.lng = lng;
 		this.lat = lat;
 		this.date = date;
+		this.activity = activity;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
 
