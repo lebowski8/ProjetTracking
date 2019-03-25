@@ -1,5 +1,6 @@
 package com.trackingapp.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trackingapp.dao.ActivityRepository;
 import com.trackingapp.dao.UtilisateurRepository;
 import com.trackingapp.exceptions.ResourceNotFoundException;
+import com.trackingapp.model.Activity;
 import com.trackingapp.model.Utilisateur;
 
 
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class UtilisateurService {
 	
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+	
+	@Autowired
+	private ActivityRepository activity;
 	
 	
 	@RequestMapping(value="/users",method=RequestMethod.GET)
@@ -34,7 +40,6 @@ public class UtilisateurService {
     public Utilisateur getUtilisateur(@PathVariable Long id) {
 		Utilisateur user = new Utilisateur();
 		user = utilisateurRepository.findById(id).orElse(null);
-		user.setPassword("");
         return user;
     }
 			
@@ -65,6 +70,17 @@ public class UtilisateurService {
 			user.setPoids(userRequest.getPoids());
 	        return utilisateurRepository.save(user);
 	    }).orElseThrow(() -> new ResourceNotFoundException("UserID " + id + " not found"));
+    }
+	
+	@RequestMapping(value="/users/{id}/activities",method=RequestMethod.GET)
+    public Collection<Activity> getActivities(@PathVariable Long id) {
+        return utilisateurRepository.findById(id).get().getActivities();
+    }
+	
+	@RequestMapping(value="/users/{id}/activities/{sport}",method=RequestMethod.GET)
+    public Collection<Activity> getActivitiesBySport(@PathVariable Long id, @PathVariable String sport) {
+        return activity.findUserActivitiesBySport(id,sport);
+        
     }
 	
 }

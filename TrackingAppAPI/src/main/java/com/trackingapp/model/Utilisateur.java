@@ -111,6 +111,14 @@ public class Utilisateur implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Collection<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Collection<Activity> activities) {
+		this.activities = activities;
+	}
 	
 	
 
